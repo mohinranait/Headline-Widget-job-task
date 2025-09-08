@@ -187,6 +187,62 @@ export function HeadlineWidget() {
     );
   };
 
+  const exportSettings = () => {
+    const exportData = {
+      settings,
+      css: getHeadlineStyle(),
+      html: `<h1 class="${settings.fontFamily} ${settings.fontWeight}">${settings.text}</h1>`,
+      timestamp: new Date().toISOString(),
+    };
+
+    const blob = new Blob([JSON.stringify(exportData, null, 2)], {
+      type: "application/json",
+    });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `headline-${settings.text
+      .replace(/\s+/g, "-")
+      .toLowerCase()}-${Date.now()}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const copyToClipboard = async () => {
+    const cssString = Object.entries(getHeadlineStyle())
+      .map(
+        ([key, value]) =>
+          `${key.replace(/([A-Z])/g, "-$1").toLowerCase()}: ${value};`
+      )
+      .join("\n  ");
+
+    const code = `
+.headline {
+  ${cssString}
+}
+
+
+<h1 class="headline ${settings.fontFamily} ${settings.fontWeight}">${
+      settings.text
+    }</h1>
+
+<h1 
+  className="${settings.fontFamily} ${settings.fontWeight}"
+  style={{${Object.entries(getHeadlineStyle())
+    .map(([key, value]) => `\n    ${key}: "${value}"`)
+    .join(",")}
+  }}
+>
+  ${settings.text}
+</h1>`;
+
+    try {
+      await navigator.clipboard.writeText(code);
+    } catch (err) {
+      console.error("Failed to copy to clipboard:", err);
+    }
+  };
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
       {/* Controls Panel */}
@@ -752,11 +808,15 @@ export function HeadlineWidget() {
           </h2>
 
           <div className="space-y-2">
-            <Button className="w-full bg-sidebar-accent hover:bg-sidebar-accent/90 text-sidebar-accent-foreground text-sm">
+            <Button
+              onClick={exportSettings}
+              className="w-full bg-sidebar-accent hover:bg-sidebar-accent/90 text-sidebar-accent-foreground text-sm"
+            >
               <Download className="w-3 h-3 mr-2" />
               Export JSON
             </Button>
             <Button
+              onClick={copyToClipboard}
               variant="outline"
               className="w-full border-sidebar-border text-sidebar-foreground hover:bg-sidebar-accent/10 bg-transparent text-sm"
             >
