@@ -2,6 +2,11 @@
 
 A Next.js application for creating customizable headline widgets with advanced text styling features, built as a job task. This project allows users to style headlines with options for font, color, gradient, text effects, and per-word or selected text styling, with real-time preview and export capabilities.
 
+## Necessary Links
+
+1. [Demo](https://headline-widget-job-task.vercel.app)
+2. [Github](https://github.com/mohinranait/Headline-Widget-job-task)
+
 ## Features
 
 - **Typography Controls**: Adjust font family, size, weight, letter spacing, and line height.
@@ -37,8 +42,9 @@ Follow these steps to set up and run the project locally.
 1. **Clone the Repository**:
 
    ```bash
-   git clone https://github.com/mohinranait/Headline-Widget-job-task.git
-   cd Headline-Widget-job-task
+   1. git clone https://github.com/mohinranait/Headline-Widget-job-task.git
+
+   2. cd Headline-Widget-job-task
    ```
 
 2. **Install Dependencies**:
@@ -95,19 +101,6 @@ To learn more about the technologies used in this project:
 - [Framer Motion Documentation](https://www.framer.com/motion/) - Understand animations used in the widget.
 - [shadcn/ui Documentation](https://ui.shadcn.com/) - Details on the UI components used.
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs) - Learn about the styling framework.
-
-## Deployment
-
-The easiest way to deploy this Next.js app is via the [Vercel Platform](https://vercel.com). Follow the [Next.js deployment documentation](https://nextjs.org/docs/deployment) for detailed instructions.
-
-1. Push your code to the GitHub repository:
-
-   ```bash
-   git push origin main
-   ```
-
-2. Connect the repository to Vercel via the Vercel dashboard.
-3. Deploy the app with automatic scaling and domain setup.
 
 ## Contact
 
