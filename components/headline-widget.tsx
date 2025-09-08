@@ -60,10 +60,12 @@ export function HeadlineWidget() {
     setSettings(DEFAULT_SETTINGS);
   };
 
+  // Apply preset for seeing instance UI / QUICK UI
   const applyPreset = (preset: (typeof DEFAULT_TEMPLATES)[0]) => {
     setSettings((prev) => ({ ...prev, ...preset.settings }));
   };
 
+  // Style for heading
   const getHeadlineStyle = () => {
     const baseStyle: React.CSSProperties = {
       fontSize: `${settings.fontSize}px`,
@@ -119,6 +121,7 @@ export function HeadlineWidget() {
 
   const renderAnimatedText = () => {
     if (!settings.perLetterAnimation) {
+      // Without animation text
       return (
         <motion.h1
           key={settings.text + settings.fontSize + settings.hasGradient}
@@ -148,6 +151,7 @@ export function HeadlineWidget() {
       );
     }
 
+    // FOR animation
     return (
       <h1
         className={`${settings.fontFamily} ${
@@ -247,9 +251,9 @@ export function HeadlineWidget() {
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
       {/* Controls Panel */}
       <div className="lg:col-span-1 space-y-4">
-        <Card className="p-4 bg-sidebar border-sidebar-border">
+        <Card className="p-4 gap-3 bg-sidebar ">
           <div className="flex items-center justify-between mb-3">
-            <h2 className="text-lg font-semibold text-sidebar-foreground flex items-center gap-2">
+            <h2 className="text-lg font-semibold  flex items-center gap-2">
               <Zap className="w-4 h-4" />
               Quick Start
             </h2>
@@ -257,7 +261,7 @@ export function HeadlineWidget() {
               onClick={resetSettings}
               variant="outline"
               size="sm"
-              className="border-sidebar-border text-sidebar-foreground hover:bg-sidebar-accent/10 bg-transparent"
+              className="  hover:bg-sidebar-accent/10 bg-transparent"
             >
               <RotateCcw className="w-3 h-3 mr-1" />
               Reset
@@ -271,7 +275,7 @@ export function HeadlineWidget() {
                 onClick={() => applyPreset(preset)}
                 variant="outline"
                 size="sm"
-                className="text-xs border-sidebar-border text-sidebar-foreground hover:bg-sidebar-accent/10 h-auto py-2 px-3"
+                className="text-xs    h-auto py-2 px-3"
               >
                 {preset.name}
               </Button>
@@ -279,17 +283,12 @@ export function HeadlineWidget() {
           </div>
         </Card>
 
-        <Card className="p-4 bg-sidebar border-sidebar-border">
-          <h2 className="text-lg font-semibold  text-sidebar-foreground">
-            Typography Controls
-          </h2>
+        <Card className="p-4 gap-3 bg-sidebar ">
+          <h2 className="text-lg font-semibold  ">Typography Controls</h2>
 
           <div className="space-y-3">
             <div>
-              <Label
-                htmlFor="headline-text"
-                className="text-sidebar-foreground text-sm"
-              >
+              <Label htmlFor="headline-text" className=" text-sm">
                 Headline Text
               </Label>
               <Input
@@ -303,7 +302,7 @@ export function HeadlineWidget() {
 
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <Label className="text-sidebar-foreground text-sm">
+                <Label className=" text-sm">
                   Font Size: {settings.fontSize}px
                 </Label>
                 <Slider
@@ -317,7 +316,7 @@ export function HeadlineWidget() {
               </div>
 
               <div>
-                <Label className="text-sidebar-foreground text-sm">
+                <Label className=" text-sm">
                   Letter Spacing: {settings.letterSpacing}px
                 </Label>
                 <Slider
@@ -335,9 +334,7 @@ export function HeadlineWidget() {
 
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <Label className="text-sidebar-foreground text-sm">
-                  Font Family
-                </Label>
+                <Label className=" text-sm">Font Family</Label>
                 <Select
                   value={settings.fontFamily}
                   onValueChange={(value) => updateSetting("fontFamily", value)}
@@ -356,9 +353,7 @@ export function HeadlineWidget() {
               </div>
 
               <div>
-                <Label className="text-sidebar-foreground text-sm">
-                  Font Weight
-                </Label>
+                <Label className=" text-sm">Font Weight</Label>
                 <Select
                   value={settings.fontWeight}
                   onValueChange={(value) => updateSetting("fontWeight", value)}
@@ -378,7 +373,7 @@ export function HeadlineWidget() {
             </div>
 
             <div>
-              <Label className="text-sidebar-foreground text-sm">
+              <Label className=" text-sm">
                 Line Height: {settings.lineHeight}
               </Label>
               <Slider
@@ -393,17 +388,15 @@ export function HeadlineWidget() {
           </div>
         </Card>
 
-        <Card className="p-4 bg-sidebar border-sidebar-border">
-          <h2 className="text-lg font-semibold text-sidebar-foreground flex items-center gap-2">
+        <Card className="p-4 gap-3 bg-sidebar ">
+          <h2 className="text-lg font-semibold  flex items-center gap-2">
             <Palette className="w-4 h-4" />
             Color & Gradient
           </h2>
 
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <Label className="text-sidebar-foreground text-sm">
-                Enable Gradient
-              </Label>
+              <Label className=" text-sm">Enable Gradient</Label>
               <Switch
                 checked={settings.hasGradient}
                 onCheckedChange={(checked) =>
@@ -414,9 +407,7 @@ export function HeadlineWidget() {
 
             {!settings.hasGradient ? (
               <div>
-                <Label className="text-sidebar-foreground text-sm">
-                  Text Color
-                </Label>
+                <Label className=" text-sm">Text Color</Label>
                 <div className="flex items-center gap-2 mt-1">
                   <Input
                     type="color"
@@ -434,16 +425,14 @@ export function HeadlineWidget() {
             ) : (
               <div className="space-y-3">
                 <div>
-                  <Label className="text-sidebar-foreground text-sm">
-                    Gradient Direction
-                  </Label>
+                  <Label className=" text-sm">Gradient Direction</Label>
                   <Select
                     value={settings.gradientDirection}
                     onValueChange={(value) =>
                       updateSetting("gradientDirection", value)
                     }
                   >
-                    <SelectTrigger className="mt-1 bg-input border-border text-sm">
+                    <SelectTrigger className="mt-1 w-full bg-input border-border text-sm">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
@@ -461,9 +450,7 @@ export function HeadlineWidget() {
 
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <Label className="text-sidebar-foreground text-sm">
-                      Start Color
-                    </Label>
+                    <Label className=" text-sm">Start Color</Label>
                     <div className="flex items-center gap-1 mt-1">
                       <Input
                         type="color"
@@ -484,9 +471,7 @@ export function HeadlineWidget() {
                   </div>
 
                   <div>
-                    <Label className="text-sidebar-foreground text-sm">
-                      End Color
-                    </Label>
+                    <Label className=" text-sm">End Color</Label>
                     <div className="flex items-center gap-1 mt-1">
                       <Input
                         type="color"
@@ -510,9 +495,7 @@ export function HeadlineWidget() {
             )}
 
             <div className="flex items-center justify-between">
-              <Label className="text-sidebar-foreground text-sm">
-                Text Shadow
-              </Label>
+              <Label className=" text-sm">Text Shadow</Label>
               <Switch
                 checked={settings.textShadow}
                 onCheckedChange={(checked) =>
@@ -523,17 +506,15 @@ export function HeadlineWidget() {
           </div>
         </Card>
 
-        <Card className="p-4 bg-sidebar border-sidebar-border">
-          <h2 className="text-lg font-semibold mb-3 text-sidebar-foreground flex items-center gap-2">
+        <Card className="p-4 gap-3 bg-sidebar ">
+          <h2 className="text-lg font-semibold mb-3  flex items-center gap-2">
             <Sparkles className="w-4 h-4" />
             Advanced Effects
           </h2>
 
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <Label className="text-sidebar-foreground text-sm">
-                Text Stroke
-              </Label>
+              <Label className=" text-sm">Text Stroke</Label>
               <Switch
                 checked={settings.textStroke}
                 onCheckedChange={(checked) =>
@@ -545,7 +526,7 @@ export function HeadlineWidget() {
             {settings.textStroke && (
               <div className="grid grid-cols-2 gap-3  ">
                 <div>
-                  <Label className="text-sidebar-foreground text-xs">
+                  <Label className=" text-xs">
                     Width: {settings.strokeWidth}px
                   </Label>
                   <Slider
@@ -561,9 +542,7 @@ export function HeadlineWidget() {
                 </div>
 
                 <div>
-                  <Label className="text-sidebar-foreground text-xs">
-                    Color
-                  </Label>
+                  <Label className=" text-xs">Color</Label>
                   <div className="flex items-center gap-1 mt-1">
                     <Input
                       type="color"
@@ -586,9 +565,7 @@ export function HeadlineWidget() {
             )}
 
             <div className="flex items-center justify-between">
-              <Label className="text-sidebar-foreground text-sm">
-                Hover Glow
-              </Label>
+              <Label className=" text-sm">Hover Glow</Label>
               <Switch
                 checked={settings.hoverGlow}
                 onCheckedChange={(checked) =>
@@ -600,7 +577,7 @@ export function HeadlineWidget() {
             {settings.hoverGlow && (
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <Label className="text-sidebar-foreground text-xs">
+                  <Label className=" text-xs">
                     Intensity: {settings.glowIntensity}px
                   </Label>
                   <Slider
@@ -616,9 +593,7 @@ export function HeadlineWidget() {
                 </div>
 
                 <div>
-                  <Label className="text-sidebar-foreground text-xs">
-                    Color
-                  </Label>
+                  <Label className=" text-xs">Color</Label>
                   <div className="flex items-center gap-1 mt-1">
                     <Input
                       type="color"
@@ -641,9 +616,7 @@ export function HeadlineWidget() {
             )}
 
             <div className="flex items-center justify-between">
-              <Label className="text-sidebar-foreground text-sm">
-                Per-Letter Animation
-              </Label>
+              <Label className=" text-sm">Per-Letter Animation</Label>
               <Switch
                 checked={settings.perLetterAnimation}
                 onCheckedChange={(checked) =>
@@ -654,7 +627,7 @@ export function HeadlineWidget() {
 
             {settings.perLetterAnimation && (
               <div className="">
-                <Label className="text-sidebar-foreground text-xs">
+                <Label className=" text-xs">
                   Animation Delay: {settings.animationDelay}s
                 </Label>
                 <Slider
@@ -672,17 +645,15 @@ export function HeadlineWidget() {
           </div>
         </Card>
 
-        <Card className="p-4 bg-sidebar border-sidebar-border">
-          <h2 className="text-lg font-semibold mb-3 text-sidebar-foreground flex items-center gap-2">
+        <Card className="p-4 gap-3 bg-sidebar ">
+          <h2 className="text-lg font-semibold mb-3  flex items-center gap-2">
             <Type className="w-4 h-4" />
             Word Styling
           </h2>
 
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <Label className="text-sidebar-foreground text-sm">
-                Background Highlight
-              </Label>
+              <Label className=" text-sm">Background Highlight</Label>
               <Switch
                 checked={settings.backgroundHighlight}
                 onCheckedChange={(checked) =>
@@ -694,9 +665,7 @@ export function HeadlineWidget() {
             {settings.backgroundHighlight && (
               <div className="grid grid-cols-2 gap-3 ">
                 <div>
-                  <Label className="text-sidebar-foreground text-xs">
-                    Color
-                  </Label>
+                  <Label className=" text-xs">Color</Label>
                   <div className="flex items-center gap-1 mt-1">
                     <Input
                       type="color"
@@ -717,7 +686,7 @@ export function HeadlineWidget() {
                 </div>
 
                 <div>
-                  <Label className="text-sidebar-foreground text-xs">
+                  <Label className=" text-xs">
                     Padding: {settings.highlightPadding}px
                   </Label>
                   <Slider
@@ -735,9 +704,7 @@ export function HeadlineWidget() {
             )}
 
             <div>
-              <Label className="text-sidebar-foreground text-sm">
-                Underline Style
-              </Label>
+              <Label className=" text-sm">Underline Style</Label>
               <Select
                 value={settings.underlineStyle}
                 onValueChange={(value) =>
@@ -760,9 +727,7 @@ export function HeadlineWidget() {
             {settings.underlineStyle !== "none" && (
               <div className="grid grid-cols-2 gap-3 ">
                 <div>
-                  <Label className="text-sidebar-foreground text-xs">
-                    Color
-                  </Label>
+                  <Label className=" text-xs">Color</Label>
                   <div className="flex items-center gap-1 mt-1">
                     <Input
                       type="color"
@@ -783,7 +748,7 @@ export function HeadlineWidget() {
                 </div>
 
                 <div>
-                  <Label className="text-sidebar-foreground text-xs">
+                  <Label className=" text-xs">
                     Thickness: {settings.underlineThickness}px
                   </Label>
                   <Slider
@@ -802,23 +767,18 @@ export function HeadlineWidget() {
           </div>
         </Card>
 
-        <Card className="p-4 bg-sidebar border-sidebar-border">
-          <h2 className="text-lg font-semibold mb-3 text-sidebar-foreground">
-            Export
-          </h2>
+        <Card className="p-4 gap-3 bg-sidebar ">
+          <h2 className="text-lg font-semibold mb-3 ">Export</h2>
 
           <div className="space-y-2">
-            <Button
-              onClick={exportSettings}
-              className="w-full bg-sidebar-accent hover:bg-sidebar-accent/90 text-sidebar-accent-foreground text-sm"
-            >
+            <Button onClick={exportSettings} className="w-full    text-sm">
               <Download className="w-3 h-3 mr-2" />
               Export JSON
             </Button>
             <Button
               onClick={copyToClipboard}
               variant="outline"
-              className="w-full border-sidebar-border text-sidebar-foreground hover:bg-sidebar-accent/10 bg-transparent text-sm"
+              className="w-full   bg-transparent text-sm"
             >
               <Copy className="w-3 h-3 mr-2" />
               Copy CSS & HTML

@@ -1,5 +1,3 @@
-"use client";
-
 import { HeadlineWidget } from "@/components/headline-widget";
 
 export default function Home() {

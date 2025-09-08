@@ -11,7 +11,7 @@ export const FONT_WEIGHTS = [
   { value: "font-medium", label: "Medium" },
   { value: "font-semibold", label: "Semibold" },
   { value: "font-bold", label: "Bold" },
-  { value: "font-black", label: "Black" },
+  { value: "font-extrabold", label: "Extra Bold" },
 ]
 
 export const UNDERLINE_STYLES = [
